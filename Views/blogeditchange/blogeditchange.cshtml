@@ -1,0 +1,17 @@
+@model EmreSarıyer.Models.BlogModel
+
+    @if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+else{
+<form method="post" class="Blogcreate-form" asp-action="Blogupdate" asp-controller="Blogeditchange" enctype="multipart/form-data">
+    <input type="number" name="Blogid" value="@Model.Blogid" style="display: none;"/>
+    <input placeholder="Youtube Linki" class="input-blogcreate" value="@Model.Youtubelink"  name="Youtubelink" type="text" />
+    <input type="file" name="Newimage"  placeholder="Resim dosyanızı yükleyin">
+    <textarea class="blog-text"  placeholder="Yazınızı buraya yazabilirsiniz..." name="Text">@Model.Text</textarea>
+    <input type="text" placeholder="Başlık" value="@Model.BlogTitle" class="input-blogcreate" name="BlogTitle">
+    <input type="text" name="BlogSubtitle" value="@Model.BlogSubtitle"  class="input-blogcreate" placeholder="Altbaşlık" maxlength="50"/>
+    <button type="submit">Kaydet</button>
+</form>
+}

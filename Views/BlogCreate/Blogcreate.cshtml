@@ -1,0 +1,8 @@
+<form method="post" class="Blogcreate-form" asp-action="BlogCreate" asp-controller="Blogcreate" enctype="multipart/form-data">
+    <input placeholder="Youtube Linki" class="input-blogcreate"  name="Youtubelink" type="text" />
+    <input type="file" name="image" placeholder="Resim dosyanızı yükleyin">
+    <textarea class="blog-text" placeholder="Yazınızı buraya yazabilirsiniz..." name="Text"></textarea>
+    <input type="text" placeholder="Başlık" class="input-blogcreate" name="BlogTitle">
+    <input type="text" name="BlogSubtitle" class="input-blogcreate" placeholder="Altbaşlık" maxlength="50"/>
+    <button type="submit">Oluştur</button>
+</form>

@@ -1,0 +1,15 @@
+@model EmreSarıyer.Models.UserModel
+<form asp-action="UserUpdate" asp-controller="usersdetails" method="post"class="sign-in-form">
+    @if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+    <h4>Profil</h4>
+    <div class="sign-in-form-div">
+        <input name="id" type="number" style="display: none;" value="@Model.id"/>
+        <input class="sign-in-input" name="Name" type="text" placeholder="Adınız" value="@Model.Name" />
+        <input class="sign-in-input" name="Surname" type="text" placeholder="Soyadınız" value="@Model.Surname"/>
+        <input class="sign-in-input" name="email" type="text" placeholder="E-mail" value="@Model.email"/>
+        <button type="submit" class="sign-in-submit">Kaydet</button>
+    </div>
+</form>

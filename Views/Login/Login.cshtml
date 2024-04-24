@@ -1,0 +1,16 @@
+<form asp-action="Login" asp-controller="login" method="post"class="sign-in-form">
+    @if (TempData["SuccessMessage"] != null)
+    {
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+    <h4>Giriş Yap</h4>
+    <div class="sign-in-form-div">
+        <input class="sign-in-input" name="email" type="text" placeholder="E-mail"/>
+        <input class="sign-in-input" name="Password" type="password" placeholder="Parola"/>
+        <button type="submit" class="sign-in-submit">Giriş Yap</button>
+    </div>
+</form>

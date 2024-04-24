@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="emrelogo.ico">
+    <title>Game Pulse Hub</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EmreSarıyer.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <navbar class="navbar">
+            @{
+                var baseUrl = $"{Context.Request.Scheme}://{Context.Request.Host}";
+            }
+            <a href="@baseUrl"><img class="navbar-logo" src="~/images/emrelogo.jpeg"></a>
+            <div class="navbar-right">
+            @if (Context.Session.GetString("UserId") == null){
+                <button><a href="@($"{baseUrl}/signin")">Üye Ol</a></button>
+                <button><a href="@($"{baseUrl}/login")">Giriş Yap</a></button>
+            }
+            else if(Context.Session.GetString("UserRole") == "2"){
+                <button><a href="@($"{baseUrl}/profile")">Profil</a></button>
+                <button><a href="@($"{baseUrl}/blogcreate")">Blog Paylaş</a></button>
+                <button><a href="@($"{baseUrl}/users")">Üyeler</a></button>
+                <button><a href="@($"{baseUrl}/blogedit")">Blog Düzenle</a></button>
+                <button><a href="@($"{baseUrl}/exit")">Çıkış</a></button>
+            }
+            else{
+                <button><a href="@($"{baseUrl}/profile")">Profil</a></button>
+                <button><a href="@($"{baseUrl}/exit")">Çıkış</a></button>
+            }
+        </div>
+    </navbar>
+    @RenderBody()
+</body>
+</html>

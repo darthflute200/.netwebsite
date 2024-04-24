@@ -1,0 +1,34 @@
+@model List<EmreSarıyer.Models.UserModel>
+<div class="homepage-main">
+    <div class="blogs-container">
+        @foreach (var user in Model)
+        {
+        <a class="user-box" href="usersdetails/@user.id">
+            <span>@user.id</span>
+            <span>@user.Name</span>
+            <span>@user.Surname</span>
+            <form asp-action="UserAdminDelete" asp-controller="users">
+                <input type="number" name="Userid" value="@user.id" style="display: none;"/>
+                <button type="submit">sil</button>
+            </form>
+        </a>
+        }
+    </div>
+<div class="pagination-container">
+    @if (ViewBag.UserCurrentPage > 1)
+    {
+        <a href="@Url.Action("Index", "users", new { page = ViewBag.UserCurrentPage - 1 })">Önceki</a>
+    }
+    
+    @for (int i = 1; i <= ViewBag.UserTotalPages; i++)
+    {
+        <a href="@Url.Action("Index", "users", new { page = i })">@i</a>
+    }
+
+    @if (ViewBag.UserCurrentPage < ViewBag.UserTotalPages)
+    {
+        <a href="@Url.Action("Index", "users", new { page = ViewBag.UserCurrentPage + 1 })">Sonraki</a>
+    }
+</div>
+
+</div>

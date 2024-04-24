@@ -1,0 +1,41 @@
+@model List<EmreSarıyer.Models.BlogModel>
+<div class="homepage-main">
+    <div class="blogs-container">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+        }
+        @foreach (var blog in Model)
+        {
+        <form class="blogs-container-form" method="post" asp-controller="blogedit" asp-action="deleteblog">
+            <a class="blogs-box">
+                <img class="blog-img" src="@blog.Picture"/>
+                <div class="blog-titles-container">
+                    <h4 class="blog-title">@blog.BlogTitle</h4>
+                    <span class="blog-span">@blog.BlogSubtitle</span>
+                    <input name="blogid" type="int" value="@blog.Blogid" style="display: none;"/>
+                </div>
+            </a>
+            <button type="submit">Sil</button>
+            <button><a href="blogeditchange/@blog.Blogid">Düzenle</a></button>
+        </form>
+        }
+    </div>
+<div class="pagination-container">
+    @if (ViewBag.CurrentPage > 1)
+    {
+        <a href="@Url.Action("Index", "blogedit", new { page = ViewBag.CurrentPage - 1 })">Önceki</a>
+    }
+    
+    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+    {
+        <a href="@Url.Action("Index", "blogedit", new { page = i })">@i</a>
+    }
+
+    @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+    {
+        <a href="@Url.Action("Index", "blogedit", new { page = ViewBag.CurrentPage + 1 })">Sonraki</a>
+    }
+</div>
+
+</div>

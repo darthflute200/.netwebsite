@@ -1,0 +1,23 @@
+@model UserModel;
+@using Newtonsoft.Json
+
+@{
+    var userInputJson = TempData["UserInput"] as string;
+    var userInput = userInputJson != null ? JsonConvert.DeserializeObject<UserModel>(userInputJson) : new UserModel();
+}
+
+<form asp-action="Create" asp-controller="Signin" method="post"class="sign-in-form">
+    @if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+    <h4>Üye Ol</h4>
+    <div class="sign-in-form-div">
+            <input class="sign-in-input" name="Name" type="text" placeholder="Adınız" value="@userInput.Name"/>
+    <input class="sign-in-input" name="Surname" type="text" placeholder="Soyadınız" value="@userInput.Surname"/>
+    <input class="sign-in-input" name="email" type="text" placeholder="E-mail" value="@userInput.email"/>
+        <input class="sign-in-input" name="Password" type="password" placeholder="Parola"/>
+        <input class="sign-in-input" name="PasswordRepeat" type="password" placeholder="Parola Tekrar"/>
+        <button type="submit" class="sign-in-submit">Üye Ol</button>
+    </div>
+</form>

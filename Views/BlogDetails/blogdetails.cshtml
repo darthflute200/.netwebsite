@@ -1,0 +1,49 @@
+@model EmreSarıyer.Models.BlogdetailModel
+<div class="blog-details-container">
+    <h4 class="blog-details-title">@Model.Blog.BlogTitle</h4>
+    <img class="blog-details-photo" src="@Model.Blog.Picture"/>
+    <p class="blog-details-p">@Model.Blog.Text</p>
+    <iframe width="560" height="315" src="@Model.Blog.Youtubelink" frameborder="0" allowfullscreen></iframe>
+</div>
+<div class="comment-container">
+    <h4 class="comment-h4">Yorumlar</h4>
+    <div class="comments">
+        @if(Model.Comments.Any()){
+            foreach(var comment in Model.Comments){
+                <div class="comment-blog-container">
+                    <div class="comment-blog-left">
+                        <div class="comment-user-info-container">
+                            <span>@comment.UserName</span>
+                            <span>@comment.UserSurname</span>
+                        </div>
+                        <p class="comment-p">@comment.Comment</p>
+                    </div>
+                    @if(@Context.Session.GetInt32("UserId") != null){
+                        @if(@comment.Userid == @Context.Session.GetInt32("UserId")){
+                            <form asp-action="CommentDelete" asp-controller="blogdetails" method="post">
+                                <input type="number" name="commentid" value="@comment.Commentid" style="display: none;"/>
+                                <button type="submit">Sil</button>
+                            </form>
+                        }
+                    }
+                </div>
+            }
+        }
+        @if (@Model.User != null){
+        <form method="post" asp-action="CommentPost" asp-controller="blogdetails" class="newcomment-form">
+            <div class="comment-user-info-container form-user">
+                <span>@Model.User.Name</span>
+                <span>@Model.User.Surname</span>
+            </div>
+            <textarea name="Comment" placeholder="Yorumunuzu buraya yazınız..." class="newcomment-textarea"></textarea>
+            <button type="submit" class="newcomment-submit">Gönder</button>
+            <input type="number" name="Userid" style="display: none;" value="@Context.Session.GetInt32("UserId")"/>
+            <input type="text" name="date" style="display: none;" value="@DateTime.Now.ToString("yyyy-MM-dd HH")" />
+            <input type="text" name="BlogId" style="display: none;" value="@Model.Blog.Blogid" />
+            <input type="text" name="UserName" style="display: none;" value="@Model.User.Name"/>
+            <input type="text" name="UserSurname" style="display: none;" value="@Model.User.Surname"/>
+        </form>
+    }
+    </div>
+</div>
+<div class="footer"></div>

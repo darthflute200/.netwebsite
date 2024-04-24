@@ -1,0 +1,26 @@
+@model EmreSarıyer.Models.UserModel
+<form asp-action="ProfileUpdate" asp-controller="profile" method="post"class="sign-in-form">
+    @if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+    else if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+    <h4>Profil</h4>
+    <div class="sign-in-form-div">
+        <input class="sign-in-input" name="Name" type="text" placeholder="Adınız" value="@Model.Name" />
+        <input class="sign-in-input" name="Surname" type="text" placeholder="Soyadınız" value="@Model.Surname"/>
+        <input class="sign-in-input" name="email" type="text" placeholder="E-mail" value="@Model.email"/>
+        <button type="submit" class="sign-in-submit">Kaydet</button>
+    </div>
+</form>
+<form asp-controller="profile" asp-action="deleteUser" method="post" class="delete-user-form">
+    <input type="number" name="Userid" value="@Model.id" style="display: none;"/>
+    <button type="submit" style="background-color: red; color: white; border-radius: 15px;">Üyeliği sil</button>
+</form>
+<form asp-controller="profile" asp-action="ForgotPassword" method="post" class="delete-user-form">
+    <input type="text" name="email" value="@Model.email" style="display: none;"/>
+    <button type="submit" style="background-color: blue; color: white; border-radius: 15px;">Şifremi unuttum</button>
+</form>

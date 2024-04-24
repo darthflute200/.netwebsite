@@ -1,0 +1,33 @@
+﻿@model List<EmreSarıyer.Models.BlogModel>
+<div class="homepage-main">
+    <div class="blogs-container">
+        @foreach (var blog in Model)
+        {
+        <a class="blogs-box" href="blogdetails/@blog.Blogid">
+            <img class="blog-img" src="@blog.Picture"/>
+            <div class="blog-titles-container">
+                <h4 class="blog-title">@blog.BlogTitle</h4>
+                <span class="blog-span">@blog.BlogSubtitle</span>
+            </div>
+        </a>
+        }
+    </div>
+<div class="pagination-container">
+    @if (ViewBag.CurrentPage > 1)
+    {
+        <a href="@Url.Action("Index", "Home", new { page = ViewBag.CurrentPage - 1 })">Önceki</a>
+    }
+    
+    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+    {
+        <a href="@Url.Action("Index", "Home", new { page = i })">@i</a>
+    }
+
+    @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+    {
+        <a href="@Url.Action("Index", "Home", new { page = ViewBag.CurrentPage + 1 })">Sonraki</a>
+    }
+</div>
+
+</div>
+
